@@ -136,13 +136,21 @@
 				<section>
 					<h2>Client Side Setup</h2>
 					<pre><code data-trim>
-@socket = io()
+@socket = io.connect 'local.moz.com'
 @socket.on 'crawlResults', (msg) => @processCrawlResults msg
 @socket.emit 'openCrawl',
   url: @get 'url'
   clientId: @get 'id'
 					</code></pre>
 					<aside class="notes">
+						socket.io makes it very simple, removes just about all of the boilerplate you would otherwise need.
+						And it has a fallback in case your browser doesn't support websockets yet.
+
+						3 simple steps:
+							- connect to the server
+							- listen for any messages you expect just like regular event handlers
+							- open a connection by sending a message
+
 					</aside>
 				</section>
 				<section>
@@ -158,6 +166,11 @@ addConnection: (socket) ->
   socket.on 'openCrawl', (args) => @openCrawl socket, args
 					</code></pre>
 					<aside class="notes">
+						Similar simple setup:
+							- handle opening a connection
+							- make sure to handle disconnection
+							- provide the api for the client
+							- send data back to the client
 					</aside>
 				</section>
 				<section>
