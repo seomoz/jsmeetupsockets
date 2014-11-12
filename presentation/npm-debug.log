@@ -1,0 +1,32 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@1.1.36
+3 info using node@v0.8.1
+4 verbose node symlink /usr/local/bin/node
+5 verbose config file /Users/rrecuero/.npmrc
+6 verbose config file /usr/local/etc/npmrc
+7 verbose config file /usr/local/lib/node_modules/npm/npmrc
+8 warn invalid config registry="git"
+9 warn invalid config Must be a full url with 'http://'
+10 verbose read json /Users/rrecuero/dev/reveal/package.json
+11 error install Couldn't read dependencies
+12 error Error: ENOENT, open '/Users/rrecuero/dev/reveal/package.json'
+12 error  { [Error: ENOENT, open '/Users/rrecuero/dev/reveal/package.json']
+12 error   errno: 34,
+12 error   code: 'ENOENT',
+12 error   path: '/Users/rrecuero/dev/reveal/package.json' }
+13 error You may report this log at:
+13 error     <http://github.com/isaacs/npm/issues>
+13 error or email it to:
+13 error     <npm-@googlegroups.com>
+14 error System Darwin 11.3.0
+15 error command "node" "/usr/local/bin/npm" "install"
+16 error cwd /Users/rrecuero/dev/reveal
+17 error node -v v0.8.1
+18 error npm -v 1.1.36
+19 error path /Users/rrecuero/dev/reveal/package.json
+20 error code ENOENT
+21 error message ENOENT, open '/Users/rrecuero/dev/reveal/package.json'
+22 error errno 34
+23 error 34 errno
+24 verbose exit [ 34, true ]
