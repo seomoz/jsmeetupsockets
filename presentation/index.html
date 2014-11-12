@@ -135,28 +135,28 @@
 				</section>
 				<section>
 					<h2>Client Side Setup</h2>
-					<pre class="code">
+					<pre><code data-trim>
 @socket = io()
 @socket.on 'crawlResults', (msg) => @processCrawlResults msg
 @socket.emit 'openCrawl',
   url: @get 'url'
   clientId: @get 'id'
-					</pre>
+					</code></pre>
 					<aside class="notes">
 					</aside>
 				</section>
 				<section>
 					<h2>Server Side Setup</h2>
-					<pre class="code">
-  # Websocket
-  server.app.io.on 'connection', (socket) ->
-    clients.addConnection socket
+					<pre><code data-trim>
+# Websocket
+server.app.io.on 'connection', (socket) ->
+  clients.addConnection socket
 
-  # Clients class
-  addConnection: (socket) ->
-    socket.on 'disconnect', => @removeConnection socket
-    socket.on 'openCrawl', (args) => @openCrawl socket, args
-					</pre>
+# Clients class
+addConnection: (socket) ->
+  socket.on 'disconnect', => @removeConnection socket
+  socket.on 'openCrawl', (args) => @openCrawl socket, args
+					</code></pre>
 					<aside class="notes">
 					</aside>
 				</section>
