@@ -113,7 +113,7 @@
 
 						Here is where socket.Io comes into play. We use socket.IO to receive crawl messages the exact moment they happen and refresh the UI as soon as we get those messages.
 
-						For example, we receive a new 500 error and it apepars automatically, 404, 300...
+						For example, we receive a new 500 error and it appears automatically, 404, 300...
 				    </aside>
 				</section>
 				<section>
@@ -124,14 +124,29 @@
 				</section>
 				<section>
 					<h2>Architecture</h2>
-					<ul>
-						<li class="fragment roll-in">Open a connection</li>
-						<li class="fragment roll-in">Listen for events</li>
-						<li class="fragment roll-in">Send messages</li>
+					<ul style="width:100%;">
+						<li class="fragment roll-in">Client: Start the crawl
+							<pre>Crawl started</pre>
+						</li>
+						<li class="fragment roll-in">Crawl Result
+							<pre>page: '/'' status: 200</pre>
+						</li>
+						<li class="fragment roll-in">Crawl Result
+							<pre>page: '/about' status: 500</pre>
+						</li>
+						<li class="fragment roll-in">Crawl Result
+							<pre>page: '/products' status: 404</pre>
+						</li>
+						<li class="fragment roll-in">Crawl Result
+							<pre>Crawl finished</pre>
+						</li>
 					</ul>
 
 					<aside class="notes">
+						For a JavaScript developer, working with socket.io should feel quite natural, as it is event driven.
+						The difference is there isn't a 1:1 mapping as there is with a request and a callback.
 
+						Instead after opening a connection and sending an initial message or request, you may get multiple responses back.
 					</aside>
 				</section>
 				<section>
