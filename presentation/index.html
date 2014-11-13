@@ -164,6 +164,9 @@ server.app.io.on 'connection', (socket) ->
 addConnection: (socket) ->
   socket.on 'disconnect', => @removeConnection socket
   socket.on 'openCrawl', (args) => @openCrawl socket, args
+
+onCrawlResult: (msg) ->
+  @socket.emit 'crawlResults', msg
 					</code></pre>
 					<aside class="notes">
 						Similar simple setup:
