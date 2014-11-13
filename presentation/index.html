@@ -136,7 +136,7 @@
 				<section>
 					<h2>Client Side Setup</h2>
 					<pre><code data-trim>
-@socket = io.connect 'local.moz.com'
+@socket = io()
 @socket.on 'crawlResults', (msg) => @processCrawlResults msg
 @socket.emit 'openCrawl',
   url: @get 'url'
