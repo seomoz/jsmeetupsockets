@@ -39,8 +39,8 @@
 					<h2> Seattle JS Meetup</h2>
 					<image class="fragment roll-in" width='500' src='http://cdn.meme.am/instances/500x/56162754.jpg'>
 					<aside class="notes">
-				     Thank you. First of all, thanks everyone for coming to Moz. We are really glad to have the
-				     opportunity to host this seattle JS Meetup.
+				     Thank you. First of all, we would like to thank everyone for coming here. We are really glad to have the
+				     opportunity to host this seattle JS Meetup here at Moz. Welcome!
 				    </aside>
 				</section>
 
@@ -63,33 +63,35 @@
 					<h1>What is Socket.IO?</h1>
 					<iframe src="http://weplay.io" width="100%" height="480" scrolling="no" class=" fragment iframe-class" frameborder="0"></iframe>
 					<aside class="notes">
-						Socket.io is a real time engine based on Web Sockets that allows you build event-based services. You don't need to use long polling or fire multiple AJAX requests per second any more.
+						Socket.io is a real time engine based on Web Sockets that allows you build event-based services.
+						What does that mean? You don't need to use long polling or fire multiple AJAX requests per second any more.
 
-						Probably, you have heard about Socket.io and seen how to use it in sexy applications like chat services, binary streaming or even in a recreation of Pokémon.
+						Probably, you have heard about Socket.io and seen how to use it in sexy applications like chat services, binary streaming or even in a multiplayer recreation of Pokémon.
 
-						This all looks really cool, but now you may be wondering how you can use socket.io in my project. I am going to try to give you some pointers as to when you can use it.
+						This all looks really cool and all right?, but now you may be wondering how you can use socket.io in my project. I am going to try to give you some pointers as to when you can use it.
 				    </aside>
 				</section>
 
 				<section>
 					<h2> 1 - Request/Response?</h2>
 					<image class="fragment roll-in" width='500' src='http://www.pubnub.com/blog/wp-content/uploads/2013/09/WebSockets2.png'>
-					<ul class="fragment roll-in" >
+					<ul>
 						<li class="fragment roll-in"> Logging </li>
-						<li class="fragment roll-in"> Click Tracking </li>
+						<li class="fragment roll-in"> Custom Real Time Tracking </li>
 						<li class="fragment roll-in"> Loading bars or spinners </li>
 					</ul>
 					<aside class="notes">
 						Firstly, Socket.io would be the perfect tool to use when you don't require a request/response format.As long as the WebSocket connection is open, you can send messages with a small overhead. So this is perfect for when you want to send a msg from the client or server and you do not expect a response.
-				    Let me give you a couple examples. For example, when you want to send client logs to your server.
+				    Let me give you a couple examples. For example, when you want to send client logs to your server
+				    to sotre or parse them.
 
-				    Another use case would be if you want to enable real time tracking. In all these cases you don't need any response back. You are just sending the message. Another example would be a loading bar. The client just
+				    Another use case would be if you want to enable real time tracking like clicks or even every position of the mouse. In all these cases you don't need any response back. You are just sending the message. Another example would be a loading bar. The client just
 				    get the status update from the server but it doesn't need to respond.
 				  </aside>
 				</section>
 				<section>
 					<h2> 2 - Sporadic Server Push</h2>
-					<ul class="fragment roll-in" >
+					<ul>
 						<li class="fragment roll-in"> In app messages </li>
 						<li class="fragment roll-in"> Notifications </li>
 					</ul>
@@ -97,10 +99,11 @@
 						<img width='500' src="http://assets.diylol.com/hfs/36b/953/478/resized/x-x-everywhere-meme-generator-notifications-notifications-everywhere-5982f8.jpg" alt="Colons">
 				  </div>
 					<aside class="notes">
-						2. Another use case is when you need a server to contact a client sporadically.
+						Another use case is when you need a server to contact the client every now and then as a result of an
+						asynchronous event.
 						For a long time, you have probably used long polling or tools like Comet to simulate a server push.
 						Luckily, those times are over.
-						This is perfect for situtations where an asynchronous event happens and you want to refresh the web client. A perfect example would be the in app notification or messages that apps like LinkedIn,
+						A perfect example would be the in app notification or messages that apps like LinkedIn,
 						Facebook or twitter do.
 				    </aside>
 				</section>
@@ -108,30 +111,100 @@
 					<h2> Problem</h2>
 					<img src="http://i.imgur.com/TlDk18l.png" alt="Colons">
 					<aside class="notes">
-						As you may know, here at Moz we have a tool that crawls a website and return information about
-						pages found, errors or metada tags. Until now, our public test crawl sends you an email once is finished.
+						How do we use sockets at Moz? Let me give you a bit of context about the problem.
+						As you may know, we have a tool that crawls a website and return information about
+						pages, errors, not found and so on. Until now, the users only get information after the whole crawl has finished, usually days later.
 
-						We realised that the users don't want to trigger a crawl and then just get the results when everything is complete, they want real time feedback
-						that they can use to optimize their marketing efforts.
-
-						Here is where socket.Io comes into play. We use socket.IO to receive crawl messages the exact moment they happen and refresh the UI as soon as we get those messages.
-
-						For example, we receive a new 500 error and it appears automatically, 404, 300...
+						We realised that the users don't want to trigger a crawl and then wait for days, they want real time feedback. Any piece of feedback right now is more 
+						valuable and actionable than 10 a week later.
 				    </aside>
 				</section>
 				<section>
 					<img width='500' src="http://i.imgur.com/NHVlkbl.jpg" alt="Colons">
 					<aside class="notes">
-						Here is where web sockets come to the rescue. Now, Andreas is going to explain the architecture, show the demo and discuss the details about the implementation.
+						Here is where socket.Io comes into play. We use socket.IO to receive real time crawl messages  and refresh the UI the moment they happen. Now, Andreas is going to show the demo and discuss the details about the implementation.
 				   </aside>
 				</section>
+				<section>
+					<h2>Architecture</h2>
+					<ul style="width:100%;">
+						<li class="fragment roll-in">Client: Start the crawl
+							<pre>Crawl started</pre>
+						</li>
+						<li class="fragment roll-in">Crawl Result
+							<pre>page: '/'' status: 200</pre>
+						</li>
+						<li class="fragment roll-in">Crawl Result
+							<pre>page: '/about' status: 500</pre>
+						</li>
+						<li class="fragment roll-in">Crawl Result
+							<pre>page: '/products' status: 404</pre>
+						</li>
+						<li class="fragment roll-in">Crawl Result
+							<pre>Crawl finished</pre>
+						</li>
+					</ul>
 
+					<aside class="notes">
+						For a JavaScript developer, working with socket.io should feel quite natural, as it is event driven.
+						The difference is there isn't a 1:1 mapping as there is with a request and a callback.
+
+						Instead after opening a connection and sending an initial message or request, you may get multiple responses back.
+					</aside>
+				</section>
+				<section>
+					<h2>Demo</h2>
+					<a href="https://local.moz.com:3000/crawler/overview" target="_blank"><img src="images/crawler_demo.png" alt="Crawler Demo"></a>
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<h2>Client Side Setup</h2>
+					<pre><code data-trim>
+@socket = io()
+@socket.on 'crawlResults', (msg) => @processCrawlResults msg
+@socket.emit 'openCrawl',
+  url: @get 'url'
+  clientId: @get 'id'
+					</code></pre>
+					<aside class="notes">
+						socket.io makes it very simple, removes just about all of the boilerplate you would otherwise need.
+						And it has a fallback in case your browser doesn't support websockets yet.
+
+						3 simple steps:
+							- connect to the server
+							- listen for any messages you expect just like regular event handlers
+							- open a connection by sending a message
+
+					</aside>
+				</section>
+				<section>
+					<h2>Server Side Setup</h2>
+					<pre><code data-trim>
+# Websocket
+server.app.io.on 'connection', (socket) ->
+  clients.addConnection socket
+
+# Clients class
+addConnection: (socket) ->
+  socket.on 'disconnect', => @removeConnection socket
+  socket.on 'openCrawl', (args) => @openCrawl socket, args
+
+onCrawlResult: (msg) ->
+  @socket.emit 'crawlResults', msg
+					</code></pre>
+					<aside class="notes">
+						Similar simple setup:
+							- handle opening a connection
+							- make sure to handle disconnection
+							- provide the api for the client
+							- send data back to the client
+					</aside>
+				</section>
 				<section>
 					<h2>Questions?</h2>
 				</section>
-
 			</div>
-
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
