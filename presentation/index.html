@@ -49,7 +49,7 @@
 					<h3> Using websockets in your everyday project!</h3>
 					<p>
 						<small>Created by <a href="http://www.linkedin.com/in/ramonrecuero/">Ramon Recuero</a> / <a href="http://twitter.com/ramonrecuero">@ramonrecuero</a></small>
-						<small>& <a href="https://www.linkedin.com/profile/view?id=2668223&authType=NAME_SEARCH&authToken=qJnh&locale=en_US&trk=tyah2&trkInfo=tarId%3A1415762890592%2Ctas%3Aandreas%2Cidx%3A1-2-2">Andreas Heim</a> / <a href="http://twitter.com/andreas">@andreas</a></small>
+						<small>& <a href="https://www.linkedin.com/profile/view?id=2668223&authType=NAME_SEARCH&authToken=qJnh&locale=en_US&trk=tyah2&trkInfo=tarId%3A1415762890592%2Ctas%3Aandreas%2Cidx%3A1-2-2">Andreas Heim</a> / <a href="http://twitter.com/andighandi">@andreas</a></small>
 					</p>
 					<aside class="notes">
 				      My name is Ramon. Me and Andreas work on Moz Analytics,
@@ -121,8 +121,14 @@
 				<section>
 					<img width='500' src="http://i.imgur.com/NHVlkbl.jpg" alt="Colons">
 					<aside class="notes">
-						Here is where socket.Io comes into play. We use socket.IO to receive real time messages  and refresh the UI the moment they happen. Now, Andreas is going to show real code and discuss the details about the implementation.
+						Here is where socket.Io comes into play. We use socket.IO to receive real time messages  and refresh the UI the moment they happen. Now, Andreas is going to show code and discuss the details about the implementation.
 				   </aside>
+				</section>
+				<section>
+					<h2>Demo</h2>
+					<iframe src="http://chat.socket.io" width="100%" height="480" scrolling="no" class=" fragment iframe-class" frameborder="0"></iframe>
+					<aside class="notes">
+					</aside>
 				</section>
 				<section>
 					<h2>Architecture</h2>
@@ -146,12 +152,6 @@
 						The difference is there isn't a 1:1 mapping as there is with a request and a callback.
 
 						Instead after opening a connection and sending an initial message or request, you may get multiple responses back.
-					</aside>
-				</section>
-				<section>
-					<h2>Demo</h2>
-					<iframe src="http://chat.socket.io" width="100%" height="480" scrolling="no" class=" fragment iframe-class" frameborder="0"></iframe>
-					<aside class="notes">
 					</aside>
 				</section>
 				<section>
