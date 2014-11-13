@@ -37,7 +37,7 @@
 
 				<section>
 					<h2> Seattle JS Meetup</h2>
-					<image class="fragment roll-in" width='500' src='http://cdn.meme.am/instances/500x/56162754.jpg'>
+					<image class="fragment roll-in" width='500' src='https://i.imgflip.com/e4q0i.jpg'>
 					<aside class="notes">
 				     Thank you. First of all, we would like to thank everyone for coming here. We are really glad to have the
 				     opportunity to host this seattle JS Meetup here at Moz. Welcome!
@@ -109,39 +109,35 @@
 				</section>
 				<section>
 					<h2> Problem</h2>
-					<img src="http://i.imgur.com/TlDk18l.png" alt="Colons">
+					<img src="http://artwallpaperhi.com/download/view?resolution=2560x1600&file=MTI4MHg5NjAvMjAxMjExMDUvbG9hZGluZyBwcm9ncmVzcyBiYXIgMTI4MHg5NjAgd2FsbHBhcGVyX3d3dy5hcnR3YWxscGFwZXJoaS5jb21fNTEuanBn&name=bG9hZGluZ19wcm9ncmVzc19iYXJfMTI4MHg5NjBfd2FsbHBhcGVy" alt="Colons">
 					<aside class="notes">
-						How do we use sockets at Moz? Let me give you a bit of context about the problem.
-						As you may know, we have a tool that crawls a website and return information about
-						pages, errors, not found and so on. Until now, the users only get information after the whole crawl has finished, usually days later.
+						How do we use sockets at Moz? Let me give you a bit of context about some problems we face.
+						As you may know, we have tools that gather information from a website and return information about the domain once some operation is completed. Until now, the users only get information after the whole operation has finished, usually minutes or even hours later.
 
-						We realised that the users don't want to trigger a crawl and then wait for days, they want real time feedback. Any piece of feedback right now is more 
+						We realised that the users don't want to trigger a report and then wait for long, they want real time feedback. Any piece of feedback right now is more 
 						valuable and actionable than 10 a week later.
 				    </aside>
 				</section>
 				<section>
 					<img width='500' src="http://i.imgur.com/NHVlkbl.jpg" alt="Colons">
 					<aside class="notes">
-						Here is where socket.Io comes into play. We use socket.IO to receive real time crawl messages  and refresh the UI the moment they happen. Now, Andreas is going to show the demo and discuss the details about the implementation.
+						Here is where socket.Io comes into play. We use socket.IO to receive real time messages  and refresh the UI the moment they happen. Now, Andreas is going to show real code and discuss the details about the implementation.
 				   </aside>
 				</section>
 				<section>
 					<h2>Architecture</h2>
 					<ul style="width:100%;">
-						<li class="fragment roll-in">Client: Start the crawl
-							<pre>Crawl started</pre>
+						<li class="fragment roll-in">Client: Run the report
+							<pre>Report started</pre>
 						</li>
-						<li class="fragment roll-in">Crawl Result
-							<pre>page: '/'' status: 200</pre>
+						<li class="fragment roll-in">Report Status
+							<pre>status: running</pre>
 						</li>
-						<li class="fragment roll-in">Crawl Result
-							<pre>page: '/about' status: 500</pre>
+						<li class="fragment roll-in">Report Status
+							<pre>status: running</pre>
 						</li>
-						<li class="fragment roll-in">Crawl Result
-							<pre>page: '/products' status: 404</pre>
-						</li>
-						<li class="fragment roll-in">Crawl Result
-							<pre>Crawl finished</pre>
+						<li class="fragment roll-in">Report Status
+							<pre>status: finished</pre>
 						</li>
 					</ul>
 
@@ -154,7 +150,7 @@
 				</section>
 				<section>
 					<h2>Demo</h2>
-					<a href="https://local.moz.com:3000/crawler/overview" target="_blank"><img src="images/crawler_demo.png" alt="Crawler Demo"></a>
+					<iframe src="http://chat.socket.io" width="100%" height="480" scrolling="no" class=" fragment iframe-class" frameborder="0"></iframe>
 					<aside class="notes">
 					</aside>
 				</section>
@@ -162,9 +158,9 @@
 					<h2>Client Side Setup</h2>
 					<pre><code data-trim>
 @socket = io()
-@socket.on 'crawlResults', (msg) => @processCrawlResults msg
-@socket.emit 'openCrawl',
-  url: @get 'url'
+@socket.on 'reportStatus', (msg) => @onReportStatus msg
+@socket.emit 'startReport',
+  keyword: @get 'keyword'
   clientId: @get 'id'
 					</code></pre>
 					<aside class="notes">
@@ -188,10 +184,10 @@ server.app.io.on 'connection', (socket) ->
 # Clients class
 addConnection: (socket) ->
   socket.on 'disconnect', => @removeConnection socket
-  socket.on 'openCrawl', (args) => @openCrawl socket, args
+  socket.on 'startReport', (args) => @startReport socket, args
 
-onCrawlResult: (msg) ->
-  @socket.emit 'crawlResults', msg
+onReportStatus: (status) ->
+  @socket.emit 'reportStatus', status
 					</code></pre>
 					<aside class="notes">
 						Similar simple setup:
