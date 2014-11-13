@@ -78,7 +78,8 @@
 					</ul>
 					<aside class="notes">
 						Firstly, Socket.io would be the perfect tool to use when you don't require a request/response format. As long as the WebSocket connection is open, you can send messages with a small overhead. What kind of service that all of us use fits this situation? 
-				    Let me give you a couple examples. For example, you are sending client logs to your server or messages every time the user clicks something but you don't need any response back.
+				    Let me give you a couple examples. For example, you are sending client logs to your server or messages every time the user clicks something. In all these cases you don't need any response back. Another example would be a loading bar where the client just
+				    get the status update from the server but it doesn't need to respond.
 
 						- Client logging
 						- Analytics.
@@ -99,27 +100,27 @@
 						For a long time, you have probably used long polling or tools like Comet to simulate a server push.
 						Luckily, those times are over.
 						This is perfect for situtations where an asynchronous event happens and you want to refresh the web client. A perfect example would be the in app notification or messages that apps like LinkedIn,
-						Facebook or twitter do and that we all love.
+						Facebook or twitter do.
 				    </aside>
 				</section>
 				<section>
 					<h2> Sockets at Moz</h2>
 					<img src="http://i.imgur.com/TlDk18l.png" alt="Colons">
 					<aside class="notes">
-						As you may know, here at Moz we have web crawlers that crawl the website and return the information once the whole crawl is done. In this case, our test crawl sends you an email once is finished.
+						As you may know, here at Moz we have web crawlers that crawl the website and return the information once the whole crawl is done. In this case, our public test crawl sends you an email once is finished.
 
 						We realised that the users don't want to trigger a crawl and then just get the results when everything is complete, they want real time feedback
 						that they can use to optimize their marketing efforts.
 
 						Here is where socket.Io comes into play. We use socket.IO to receive crawl messages the exact moment they happen and refresh the UI as soon as we get those messages.
 
-						For example, we receive a new 500 error and it apepars automatically, 404, 300...
+						For example, we receive a new 500 error and it appears automatically, 404, 300...
 				    </aside>
 				</section>
 				<section>
 					<img width='500' src="http://i.imgur.com/NHVlkbl.jpg" alt="Colons">
 					<aside class="notes">
-						Now, Andreas is going to explain the solution and details about the implementation.
+						Now, Andreas is going to explain the solution, show the demo and discuss the details about the implementation.
 				   </aside>
 				</section>
 
