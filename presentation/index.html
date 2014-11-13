@@ -104,16 +104,8 @@
 				</section>
 				<section>
 					<h2> Sockets at Moz</h2>
-					<img src="http://i.imgur.com/TlDk18l.png" alt="Colons">
 					<aside class="notes">
-						As you may know, here at Moz we have web crawlers that crawl the website and return the information once the whole crawl is done. In this case, our test crawl sends you an email once is finished.
-
-						We realised that the users don't want to trigger a crawl and then just get the results when everything is complete, they want real time feedback
-						that they can use to optimize their marketing efforts.
-
-						Here is where socket.Io comes into play. We use socket.IO to receive crawl messages the exact moment they happen and refresh the UI as soon as we get those messages.
-
-						For example, we receive a new 500 error and it appears automatically, 404, 300...
+						REDO
 				    </aside>
 				</section>
 				<section>
@@ -125,20 +117,17 @@
 				<section>
 					<h2>Architecture</h2>
 					<ul style="width:100%;">
-						<li class="fragment roll-in">Client: Start the crawl
-							<pre>Crawl started</pre>
+						<li class="fragment roll-in">Client: Run the report
+							<pre>Report started</pre>
 						</li>
-						<li class="fragment roll-in">Crawl Result
-							<pre>page: '/'' status: 200</pre>
+						<li class="fragment roll-in">Report Status
+							<pre>status: running</pre>
 						</li>
-						<li class="fragment roll-in">Crawl Result
-							<pre>page: '/about' status: 500</pre>
+						<li class="fragment roll-in">Report Status
+							<pre>status: running</pre>
 						</li>
-						<li class="fragment roll-in">Crawl Result
-							<pre>page: '/products' status: 404</pre>
-						</li>
-						<li class="fragment roll-in">Crawl Result
-							<pre>Crawl finished</pre>
+						<li class="fragment roll-in">Report Status
+							<pre>status: finished</pre>
 						</li>
 					</ul>
 
@@ -151,7 +140,7 @@
 				</section>
 				<section>
 					<h2>Demo</h2>
-					<a href="https://local.moz.com:3000/crawler/overview" target="_blank"><img src="images/crawler_demo.png" alt="Crawler Demo"></a>
+					REDO
 					<aside class="notes">
 					</aside>
 				</section>
@@ -159,9 +148,9 @@
 					<h2>Client Side Setup</h2>
 					<pre><code data-trim>
 @socket = io()
-@socket.on 'crawlResults', (msg) => @processCrawlResults msg
-@socket.emit 'openCrawl',
-  url: @get 'url'
+@socket.on 'reportStatus', (msg) => @onReportStatus msg
+@socket.emit 'startReport',
+  keyword: @get 'keyword'
   clientId: @get 'id'
 					</code></pre>
 					<aside class="notes">
@@ -185,10 +174,10 @@ server.app.io.on 'connection', (socket) ->
 # Clients class
 addConnection: (socket) ->
   socket.on 'disconnect', => @removeConnection socket
-  socket.on 'openCrawl', (args) => @openCrawl socket, args
+  socket.on 'startReport', (args) => @startReport socket, args
 
-onCrawlResult: (msg) ->
-  @socket.emit 'crawlResults', msg
+onReportStatus: (status) ->
+  @socket.emit 'reportStatus', status
 					</code></pre>
 					<aside class="notes">
 						Similar simple setup:
