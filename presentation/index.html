@@ -64,7 +64,7 @@
 					<iframe src="http://weplay.io" width="100%" height="480" scrolling="no" class=" fragment iframe-class" frameborder="0"></iframe>
 					<aside class="notes">
 						Socket.io is a real time engine based on Web Sockets that allows you build event-based services.
-						What does that mean? You don't need to use long polling or fire multiple AJAX requests per second any more.
+						What does that mean? You don't need to use long polling or fire multiple AJAX requests per second to maintain a connection any more.
 
 						Probably, you have heard about Socket.io and seen how to use it in sexy applications like chat services, binary streaming or even in a multiplayer recreation of Pokémon.
 
@@ -112,10 +112,10 @@
 					<img src="http://artwallpaperhi.com/download/view?resolution=2560x1600&file=MTI4MHg5NjAvMjAxMjExMDUvbG9hZGluZyBwcm9ncmVzcyBiYXIgMTI4MHg5NjAgd2FsbHBhcGVyX3d3dy5hcnR3YWxscGFwZXJoaS5jb21fNTEuanBn&name=bG9hZGluZ19wcm9ncmVzc19iYXJfMTI4MHg5NjBfd2FsbHBhcGVy" alt="Colons">
 					<aside class="notes">
 						How do we use sockets at Moz? Let me give you a bit of context about some problems we face.
-						As you may know, we have tools that gather information from a website and return information about the domain once some operation is completed. Until now, the users only get information after the whole operation has finished, usually minutes or even hours later.
+						As you may know, we have tools that gather information from a website and report it to the user once some operation is completed. Until now, the users only get information after the whole operation has finished, usually minutes or even hours later.
 
 						We realised that the users don't want to trigger a report and then wait for long, they want real time feedback. Any piece of feedback right now is more 
-						valuable and actionable than 10 a week later.
+						valuable and actionable than 10 later.
 				    </aside>
 				</section>
 				<section>
@@ -126,7 +126,7 @@
 				</section>
 				<section>
 					<h2>Demo</h2>
-					<iframe src="http://chat.socket.io" width="100%" height="480" scrolling="no" class=" fragment iframe-class" frameborder="0"></iframe>
+					<iframe style='background-color:white' allowtransparency="false" src="http://chat.socket.io" width="100%" height="480" scrolling="no" class=" fragment iframe-class" frameborder="0"></iframe>
 					<aside class="notes">
 					</aside>
 				</section>
