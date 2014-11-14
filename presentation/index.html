@@ -54,7 +54,7 @@
 					<aside class="notes">
 				      My name is Ramon. Me and Andreas work on Moz Analytics,
 				      a software as a service tool that you can use to manage all your SEO and inbound marketing efforts.
-				      We are going to talk today about Socket.io, what is it, what can it be used for 
+				      We are going to talk today about Socket.io, what is it, what can it be used for
 				      and we'll give you a real example of how we use it here at Moz.
 				    </aside>
 				</section>
@@ -121,33 +121,45 @@
 				<section>
 					<img width='500' src="http://i.imgur.com/NHVlkbl.jpg" alt="Colons">
 					<aside class="notes">
-						Here is where socket.Io comes into play. We use socket.IO to receive real time messages  and refresh the UI the moment they happen. Now, Andreas is going to show code and discuss the details about the implementation.
+						Here is where socket.Io comes into play. We use socket.IO to receive real time messages kgknand refresh the UI the moment they happen. Now, Andreas is going to show code and discuss the details about the implementation.
 				   </aside>
 				</section>
 				<section>
 					<h2>Demo</h2>
 					<iframe style='background-color:white' allowtransparency="false" src="http://chat.socket.io" width="100%" height="480" scrolling="no" class=" fragment iframe-class" frameborder="0"></iframe>
 					<aside class="notes">
+						Let's take a look at the classic chat example. You can find the source on the socket.io site.
+
+						Instead the client awkwardly polling at a certain interval, new messages are pushed instantly.
+
+						No more clumsy webchats that keep refreshing while you try to copy and paste something.
 					</aside>
 				</section>
 				<section>
 					<h2>Architecture</h2>
 					<ul style="width:100%;">
-						<li class="fragment roll-in">Client: Run the report
+						<li class="fragment roll-in">Open connection and setup events
+						</li>
+						<li class="fragment roll-in">Send message: 'Run report'
 							<pre>Report started</pre>
 						</li>
-						<li class="fragment roll-in">Report Status
+						<li class="fragment roll-in">On Report Status
 							<pre>status: enqueued</pre>
 						</li>
-						<li class="fragment roll-in">Report Status
+						<li class="fragment roll-in">On Report Status
 							<pre>status: running</pre>
 						</li>
-						<li class="fragment roll-in">Report Status
+						<li class="fragment roll-in">On Report Status
 							<pre>status: finished</pre>
 						</li>
 					</ul>
 
 					<aside class="notes">
+						Currently, to run a report, we make an AJAX request, get a report ID back, then poll repeatedly to check the status.
+						Eventually, it's either done or errorred out. Finally we make a last request to fetch the actual report.
+
+						Gets the job done, but is certainly not very elegant and it puts an extra load on the server to re-check the status.
+
 						For a JavaScript developer, working with socket.io should feel quite natural, as it is event driven.
 						The difference is there isn't a 1:1 mapping as there is with a request and a callback.
 
