@@ -1,2 +1,4 @@
 # Ignore mac thumbnail file
 .DS_Store
+node_modules/
+*.log
